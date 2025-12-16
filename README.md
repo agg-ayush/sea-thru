@@ -171,8 +171,3 @@ python seathru-mono-e2e.py --image test.jpg --size 1024 --output quick_test.png
 → Reduce size: use `--size 1024` or `--size 512`
 → Or use CPU mode if you think GPU is causing issues: add `--no-cuda`
 
-## Credits
-
-Based on:
-- Original Sea-thru algorithm: https://github.com/hainh/sea-thru
-- Monodepth2: https://github.com/nianticlabs/monodepth2

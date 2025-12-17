@@ -34,10 +34,27 @@ models/
 
 ## Quick Start
 
-Just point it at your underwater photo:
+### Single Image Processing
+
+Process one underwater photo (automatically saves to `output/` folder):
 
 ```bash
-python seathru-mono-e2e.py --image my_photo.jpg --output fixed_photo.png
+python run.py --input my_photo.jpg
+```
+
+Or specify a custom output location:
+
+```bash
+python run.py --input my_photo.jpg --output fixed_photo.png
+```
+
+### Batch Processing
+
+Process multiple images from the `input/` folder:
+
+```bash
+# Process first 5 images from input/ folder
+python batch.py 5
 ```
 
 ## Adjusting the Results
@@ -50,10 +67,10 @@ If your photo comes out too dark or too bright, here's what to change:
 
 ```bash
 # Too dark? Make it brighter by lowering --f
-python seathru-mono-e2e.py --image photo.jpg --f 1.0 --output brighter.png
+python run.py --input photo.jpg --f 1.0
 
 # Too bright? Make it darker by raising --f
-python seathru-mono-e2e.py --image photo.jpg --f 3.5 --output darker.png
+python run.py --input photo.jpg --f 3.5
 ```
 
 **Remember:** Bigger number = darker photo, smaller number = brighter photo
@@ -63,9 +80,9 @@ python seathru-mono-e2e.py --image photo.jpg --f 3.5 --output darker.png
 Here's every setting you can change (with their default values):
 
 ```bash
-python seathru-mono-e2e.py \
-  --image input/photo.jpg \              # Your underwater photo (REQUIRED)
-  --output output/result.png \           # Where to save result (default: output.png)
+python run.py \
+  --input photo.jpg \                    # Your underwater photo (REQUIRED)
+  --output result.png \                  # Where to save result (default: output/{input_name}.png)
   --f 2.0 \                              # Brightness: lower = brighter, higher = darker
   --l 0.5 \                              # Color correction strength (0.0 to 1.0)
   --p 0.01 \                             # Detail vs smoothness (0.001 = sharp, 0.1 = smooth)
@@ -124,32 +141,41 @@ python seathru-mono-e2e.py \
 
 ### Basic usage (usually good enough)
 ```bash
-python seathru-mono-e2e.py --image underwater.jpg --output result.png
+python run.py --input underwater.jpg
 ```
 
 ### Photo came out too dark
 ```bash
-python seathru-mono-e2e.py --image underwater.jpg --f 1.2 --output result.png
+python run.py --input underwater.jpg --f 1.2
 ```
 
 ### Photo came out too bright
 ```bash
-python seathru-mono-e2e.py --image underwater.jpg --f 3.0 --output result.png
+python run.py --input underwater.jpg --f 3.0
 ```
 
 ### Shallow, clear water (needs less correction)
 ```bash
-python seathru-mono-e2e.py --image shallow.jpg --f 1.5 --l 0.4 --output result.png
+python run.py --input shallow.jpg --f 1.5 --l 0.4
 ```
 
 ### Deep, murky water (needs more correction)
 ```bash
-python seathru-mono-e2e.py --image deep.jpg --f 3.0 --l 0.7 --output result.png
+python run.py --input deep.jpg --f 3.0 --l 0.7
 ```
 
 ### Quick test (lower resolution = faster)
 ```bash
-python seathru-mono-e2e.py --image test.jpg --size 1024 --output quick_test.png
+python run.py --input test.jpg --size 1024
+```
+
+### Batch process multiple images
+```bash
+# Process first 10 images from input/ folder
+python batch.py 10
+
+# Batch process with custom settings
+python batch.py 5 --f 2.5 --size 1024
 ```
 
 ## Troubleshooting
